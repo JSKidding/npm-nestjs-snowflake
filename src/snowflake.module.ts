@@ -82,11 +82,18 @@ function createAsyncOptionsProviders(
     return [optionsProvider];
   }
 
+  const useClass = options.useClass;
+  if (!useClass) {
+    throw new Error(
+      'SnowflakeModule.forRootAsync: useClass is required when useExisting and useFactory are not provided',
+    );
+  }
+
   return [
     optionsProvider,
     {
-      provide: options.useClass!,
-      useClass: options.useClass!,
+      provide: useClass,
+      useClass,
     },
   ];
 }
